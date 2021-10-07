@@ -14,7 +14,7 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/instaclone?serverTimeZone=Asia/Seoul
+    url: jdbc:mariadb://localhost:3303/instaclone?serverTimeZone=Asia/Seoul
     username: jae
     password: 1234
 
