@@ -13,5 +13,11 @@ function update(userId, event) {
         dataType: "json",
     }).done((res) => {
         location.href = "/user/" + userId;
+    }).fail(error=> {
+        if(error.data == null) {
+            alert(error.responsJSON.message());
+        } else{
+            alert(JSON.stringify(error.responsJSON.data));
+        }
     });
 }

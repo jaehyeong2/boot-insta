@@ -7,6 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.function.Supplier;
+
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -16,7 +18,10 @@ public class UserService {
 
     @Transactional
     public User modify(int id, User user){
-        User userEntity = userRepository.findById(id).get();
+        User userEntity = userRepository.findById(id).orElseThrow(() -> {
+                return new IllegalArgumentException("찾을 수 없는 id입니다/");
+        });
+
         userEntity.setName(user.getName());
 
         String rawPassword = user.getPassword();
