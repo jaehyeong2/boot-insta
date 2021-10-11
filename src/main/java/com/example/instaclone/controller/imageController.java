@@ -2,6 +2,7 @@ package com.example.instaclone.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class imageController {
@@ -20,4 +21,9 @@ public class imageController {
     public String upload() {
         return "image/upload";
     }
+
+//    @PostMapping("/image")
+//    public String imageUpload(){
+//
+//    }
 }

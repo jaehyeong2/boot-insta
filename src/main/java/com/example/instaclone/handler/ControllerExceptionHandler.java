@@ -2,6 +2,7 @@ package com.example.instaclone.handler;
 
 
 import com.example.instaclone.dto.CommonResponseDto;
+import com.example.instaclone.handler.ex.CustomApiException;
 import com.example.instaclone.handler.ex.CustomValidationApiException;
 import com.example.instaclone.handler.ex.CustomValidationException;
 import com.example.instaclone.util.Script;
@@ -23,5 +24,10 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(CustomValidationApiException.class)
     public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
         return new ResponseEntity<>(new CommonResponseDto<>(-1,e.getMessage(),e.getErrorMap()),HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CustomApiException.class)
+    public ResponseEntity<?> apiException(CustomApiException e) {
+        return new ResponseEntity<>(new CommonResponseDto<>(-1,e.getMessage(),null),HttpStatus.BAD_REQUEST);
     }
 }
