@@ -1,6 +1,9 @@
 package com.example.instaclone.controller;
 
 import com.example.instaclone.config.auth.PrincipalDetails;
+import com.example.instaclone.domian.user.User;
+import com.example.instaclone.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,11 +12,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@RequiredArgsConstructor
 @Controller
 public class UserController {
 
+    private final UserService userService;
+
     @GetMapping("/user/{id}")
-    public String profile(@PathVariable int id) {
+    public String profile(@PathVariable int id, Model model) {
+        User userEntity = userService.userProfile(id);
+        model.addAttribute("user",userEntity);
         return "user/profile";
     }
 

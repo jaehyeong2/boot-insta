@@ -2,6 +2,7 @@ package com.example.instaclone.service;
 
 import com.example.instaclone.domian.user.User;
 import com.example.instaclone.domian.user.UserRepository;
+import com.example.instaclone.handler.ex.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,15 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
+
+    public User userProfile(int userId) {
+        User userEntity = userRepository.findById(userId).orElseThrow(() ->{
+            throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
+        });
+
+        userEntity.getImages();
+        return userEntity;
+    }
 
     @Transactional
     public User modify(int id, User user){

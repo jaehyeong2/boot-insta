@@ -3,6 +3,7 @@ package com.example.instaclone.handler;
 
 import com.example.instaclone.dto.CommonResponseDto;
 import com.example.instaclone.handler.ex.CustomApiException;
+import com.example.instaclone.handler.ex.CustomException;
 import com.example.instaclone.handler.ex.CustomValidationApiException;
 import com.example.instaclone.handler.ex.CustomValidationException;
 import com.example.instaclone.util.Script;
@@ -18,7 +19,17 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(CustomValidationException.class)
     public String validationException(CustomValidationException e) {
-        return Script.back(e.getErrorMap().toString());
+
+        if(e.getErrorMap()==null) {
+            return Script.back(e.getMessage());
+        }else{
+            return Script.back(e.getErrorMap().toString());
+        }
+    }
+
+    @ExceptionHandler(CustomException.class)
+    public String exception(CustomException e) {
+        return Script.back(e.getMessage());
     }
 
     @ExceptionHandler(CustomValidationApiException.class)
