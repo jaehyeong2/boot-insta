@@ -7,6 +7,7 @@ import com.example.instaclone.dto.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +23,7 @@ public class ImageService {
 //    @Value("${file.path}")
     private String uploadFolder = "C:/Users/wogud2/upload/";
 
+    @Transactional
     public void upload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid+"_"+imageUploadDto.getFile().getOriginalFilename();

@@ -1,4 +1,4 @@
-package com.example.instaclone.config.api;
+package com.example.instaclone.controller.api;
 
 import com.example.instaclone.config.auth.PrincipalDetails;
 import com.example.instaclone.domian.user.User;
