@@ -1,5 +1,6 @@
 package com.example.instaclone.service;
 
+import com.example.instaclone.domian.subscribe.SubscribeRepository;
 import com.example.instaclone.domian.user.User;
 import com.example.instaclone.domian.user.UserRepository;
 import com.example.instaclone.dto.UserProfileDto;
@@ -16,6 +17,7 @@ import java.util.function.Supplier;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final SubscribeRepository subscribeRepository;
     private final BCryptPasswordEncoder encoder;
 
     @Transactional(readOnly = true)
@@ -29,6 +31,12 @@ public class UserService {
         dto.setUser(userEntity);
         dto.setPageOwnerState(pageUserId == principalId);
         dto.setImageCount(userEntity.getImages().size());
+
+        int subscribeState = subscribeRepository.mSubscribeState(principalId,pageUserId);
+        int subscribeCount = subscribeRepository.mSubscribeCount(pageUserId);
+
+        dto.setSubscribeCount(subscribeCount);
+        dto.setSubscribeState(subscribeState == 1);
         return dto;
     }
 
