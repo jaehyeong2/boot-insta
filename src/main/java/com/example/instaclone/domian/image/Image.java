@@ -1,6 +1,7 @@
 package com.example.instaclone.domian.image;
 
 import com.example.instaclone.domian.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +23,9 @@ public class Image {
     private String caption;
     private String postImageUrl;
 
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name = "userId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     private LocalDateTime createDate;
