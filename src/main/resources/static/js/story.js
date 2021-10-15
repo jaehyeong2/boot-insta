@@ -133,16 +133,40 @@ function getStoryItem(image) {
 
 
 // (3) 좋아요, 안좋아요
-function toggleLike() {
-	let likeIcon = $("#storyLikeIcon-1");
+function toggleLike(imageId) {
+	let likeIcon = $("#storyLikeIcon-" + imageId);
 	if (likeIcon.hasClass("far")) {
-		likeIcon.addClass("fas");
-		likeIcon.addClass("active");
-		likeIcon.removeClass("far");
+		$.ajax({
+			type: "POST",
+			url: `/image/${imageId}/likes`,
+			dataType: "json"
+		}).done(res => {
+			let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
+			let likeCount = Number(likeCountStr) + 1;
+			$(`#storyLikeCount-${imageId}`).text(likeCount);
+
+			likeIcon.addClass("fas");
+			likeIcon.addClass("active");
+			likeIcon.removeClass("far");
+		});
+
+
+
 	} else {
-		likeIcon.removeClass("fas");
-		likeIcon.removeClass("active");
-		likeIcon.addClass("far");
+		$.ajax({
+			type: "DELETE",
+			url: `/image/${imageId}/likes`,
+			dataType: "json"
+		}).done(res => {
+			let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
+			let likeCount = Number(likeCountStr) - 1;
+			$(`#storyLikeCount-${imageId}`).text(likeCount);
+
+			likeIcon.removeClass("fas");
+			likeIcon.removeClass("active");
+			likeIcon.addClass("far");
+		});
+
 	}
 }
 
