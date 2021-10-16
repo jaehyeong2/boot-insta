@@ -3,6 +3,7 @@ package com.example.instaclone.domian.likes;
 
 import com.example.instaclone.domian.image.Image;
 import com.example.instaclone.domian.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class Likes {
     @ManyToOne
     private Image image;
 
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
