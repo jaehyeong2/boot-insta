@@ -127,10 +127,7 @@ function getStoryItem(image) {
 <!--전체 리스트 아이템end-->
 `;
 	return result;
-
 }
-
-
 
 // (3) 좋아요, 안좋아요
 function toggleLike(imageId) {

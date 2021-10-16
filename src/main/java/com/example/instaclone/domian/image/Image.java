@@ -1,5 +1,6 @@
 package com.example.instaclone.domian.image;
 
+import com.example.instaclone.domian.likes.Likes;
 import com.example.instaclone.domian.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -28,7 +30,18 @@ public class Image {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image")
+    private List<Likes> likes;
+
     private LocalDateTime createDate;
+
+    @Transient
+    private boolean likeState;
+
+    @Transient
+    private int likeCount;
 
     @PrePersist
     public void createDate() {
