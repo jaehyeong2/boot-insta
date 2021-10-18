@@ -3,6 +3,7 @@ package com.example.instaclone.domian.comment;
 
 import com.example.instaclone.domian.image.Image;
 import com.example.instaclone.domian.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Comment {
     @Column(length = 100, nullable = true)
     private String content;
 
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name="userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
