@@ -1,6 +1,7 @@
 package com.example.instaclone.domian.comment;
 
 
+import com.example.instaclone.domian.BaseTimeEntity;
 import com.example.instaclone.domian.image.Image;
 import com.example.instaclone.domian.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,9 +18,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Entity
-public class Comment {
+public class Comment extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(length = 100, nullable = true)
     private String content;

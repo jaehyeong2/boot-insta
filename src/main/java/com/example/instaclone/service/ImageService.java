@@ -30,7 +30,7 @@ public class ImageService {
 
 
     @Transactional(readOnly = true)
-    public Page<Image> imageStory(int principalId, Pageable pageable) {
+    public Page<Image> imageStory(Long principalId, Pageable pageable) {
         Page<Image> images = imageRepository.mStory(principalId,pageable);
 
         images.forEach((image) -> {

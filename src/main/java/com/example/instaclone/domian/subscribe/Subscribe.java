@@ -1,5 +1,6 @@
 package com.example.instaclone.domian.subscribe;
 
+import com.example.instaclone.domian.BaseTimeEntity;
 import com.example.instaclone.domian.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,11 +23,11 @@ import java.time.LocalDateTime;
                 )
         }
 )
-public class Subscribe {
+public class Subscribe extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @JoinColumn(name="fromUserId")
     @ManyToOne

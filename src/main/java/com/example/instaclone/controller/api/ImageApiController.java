@@ -2,7 +2,6 @@ package com.example.instaclone.controller.api;
 
 import com.example.instaclone.config.auth.PrincipalDetails;
 import com.example.instaclone.domian.image.Image;
-import com.example.instaclone.dto.CommonResponseDto;
 import com.example.instaclone.service.ImageService;
 import com.example.instaclone.service.LikesService;
 import lombok.RequiredArgsConstructor;
@@ -36,13 +35,13 @@ public class ImageApiController {
     }
 
     @PostMapping("/api/image/{imageId}/likes")
-    public ResponseEntity<?> likes(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public ResponseEntity<?> likes(@PathVariable Long imageId, @AuthenticationPrincipal PrincipalDetails principalDetails){
         likesService.like(imageId,principalDetails.getUser().getId());
         return new ResponseEntity<>(new CommonResponseDto<>(1,"좋아요 성공",null),HttpStatus.CREATED);
     }
 
     @DeleteMapping("/api/image/{imageId}/likes")
-    public ResponseEntity<?> unlikes(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public ResponseEntity<?> unlikes(@PathVariable Long imageId, @AuthenticationPrincipal PrincipalDetails principalDetails){
         likesService.unlike(imageId,principalDetails.getUser().getId());
         return new ResponseEntity<>(new CommonResponseDto<>(1,"좋아요 취소 성공",null),HttpStatus.OK);
     }

@@ -1,5 +1,6 @@
 package com.example.instaclone.domian.user;
 
+import com.example.instaclone.domian.BaseTimeEntity;
 import com.example.instaclone.domian.image.Image;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -17,11 +18,11 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(length = 20, unique = true)
     private String username;

@@ -38,7 +38,7 @@ public class imageController {
         return "image/upload";
     }
 
-    @PostMapping("/image")
+    @PostMapping("/image/upload")
     public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
         if(imageUploadDto.getFile().isEmpty()){

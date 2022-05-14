@@ -20,7 +20,7 @@ public class SubscribeService {
     private final EntityManager em;
 
     @Transactional
-    public void subscribe(int fromUserId, int toUserId){
+    public void subscribe(Long fromUserId, Long toUserId){
 
         try{
             subscribeRepository.mSubscribe(fromUserId,toUserId);
@@ -30,13 +30,13 @@ public class SubscribeService {
     }
 
     @Transactional
-    public void unsubscribe(int fromUserId, int toUserId){
+    public void unsubscribe(Long fromUserId, Long toUserId){
         subscribeRepository.muNSubscribe(fromUserId, toUserId);
     }
 
 
     @Transactional(readOnly = true)
-    public List<SubscribeDto> subscribeList(int principalId, int pageUserId) {
+    public List<SubscribeDto> subscribeList(Long principalId, Long pageUserId) {
 
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT u.id, u.username, u.profileImageUrl,");

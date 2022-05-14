@@ -28,7 +28,7 @@ public class UserService {
     private final BCryptPasswordEncoder encoder;
 
     @Transactional(readOnly = true)
-    public UserProfileDto userProfile(int pageUserId, int principalId) {
+    public UserProfileDto userProfile(Long pageUserId, Long principalId) {
         UserProfileDto dto = new UserProfileDto();
 
         User userEntity = userRepository.findById(pageUserId).orElseThrow(() ->{
@@ -53,7 +53,7 @@ public class UserService {
     }
 
     @Transactional
-    public User modify(int id, User user){
+    public User modify(Long id, User user){
         User userEntity = userRepository.findById(id).orElseThrow(() -> {
                 return new IllegalArgumentException("찾을 수 없는 id입니다/");
         });
@@ -76,7 +76,7 @@ public class UserService {
     private String uploadFolder;
 
     @Transactional
-    public User profilePhotoChange(int principalId, MultipartFile profileImageFile) {
+    public User profilePhotoChange(Long principalId, MultipartFile profileImageFile) {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid+"_"+profileImageFile.getOriginalFilename();
 

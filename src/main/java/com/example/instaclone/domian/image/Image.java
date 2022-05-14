@@ -1,5 +1,6 @@
 package com.example.instaclone.domian.image;
 
+import com.example.instaclone.domian.BaseTimeEntity;
 import com.example.instaclone.domian.comment.Comment;
 import com.example.instaclone.domian.likes.Likes;
 import com.example.instaclone.domian.user.User;
@@ -18,10 +19,10 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class Image {
+public class Image extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String caption;
     private String postImageUrl;

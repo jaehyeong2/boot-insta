@@ -2,7 +2,6 @@ package com.example.instaclone.controller.api;
 
 import com.example.instaclone.config.auth.PrincipalDetails;
 import com.example.instaclone.domian.user.User;
-import com.example.instaclone.dto.CommonResponseDto;
 import com.example.instaclone.dto.SubscribeDto;
 import com.example.instaclone.dto.UserUpdateDto;
 import com.example.instaclone.handler.ex.CustomValidationApiException;
@@ -33,7 +32,7 @@ public class UserApiController {
     private final SubscribeService subscribeService;
 
     @PutMapping("api/user/{principalId}/profileImageUrl")
-    public ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile,
+    public ResponseEntity<?> profileImageUrlUpdate(@PathVariable Long principalId, MultipartFile profileImageFile,
                                                    @AuthenticationPrincipal PrincipalDetails principalDetails){
         User userEntity = userService.profilePhotoChange(principalId,profileImageFile);
         principalDetails.setUser(userEntity);
@@ -42,14 +41,14 @@ public class UserApiController {
 
 
     @GetMapping("/api/user/{pageUserId}/subscribe")
-    public ResponseEntity<?> subscribeList(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public ResponseEntity<?> subscribeList(@PathVariable Long pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails){
         List<SubscribeDto> subscribeDto = subscribeService.subscribeList(principalDetails.getUser().getId(),pageUserId);
 
         return new ResponseEntity<>(new CommonResponseDto<>(1,"구독자 정보 불러오기 성공",subscribeDto), HttpStatus.OK);
     }
 
     @PutMapping("/api/user/{id}")
-    public CommonResponseDto<?> update(@PathVariable int id,
+    public CommonResponseDto<?> update(@PathVariable Long id,
                                        @Valid UserUpdateDto userUpdateDto,
                                        BindingResult bindingResult,
                                        @AuthenticationPrincipal PrincipalDetails principalDetails) {

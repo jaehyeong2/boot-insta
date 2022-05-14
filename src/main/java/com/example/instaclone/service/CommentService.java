@@ -19,7 +19,7 @@ public class CommentService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Comment commentWrite(String content,int imageId, int userId) {
+    public Comment commentWrite(String content,Long imageId, Long userId) {
 
         Image image = new Image();
         image.setId(imageId);
@@ -37,7 +37,7 @@ public class CommentService {
     }
 
     @Transactional
-    public void commentDelete(int id){
+    public void commentDelete(Long id){
         try{
             commentRepository.deleteById(id);
         }catch (Exception e){

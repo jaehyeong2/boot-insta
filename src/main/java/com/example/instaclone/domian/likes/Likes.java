@@ -1,6 +1,7 @@
 package com.example.instaclone.domian.likes;
 
 
+import com.example.instaclone.domian.BaseTimeEntity;
 import com.example.instaclone.domian.image.Image;
 import com.example.instaclone.domian.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,10 +26,10 @@ import java.time.LocalDateTime;
                 )
         }
 )
-public class Likes {
+public class Likes extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @JoinColumn(name = "imageId")
     @ManyToOne

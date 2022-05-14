@@ -1,7 +1,8 @@
 package com.example.instaclone.handler;
 
 
-import com.example.instaclone.dto.CommonResponseDto;
+
+import com.example.instaclone.controller.api.CommonResponseDto;
 import com.example.instaclone.handler.ex.CustomApiException;
 import com.example.instaclone.handler.ex.CustomException;
 import com.example.instaclone.handler.ex.CustomValidationApiException;

@@ -6,20 +6,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SubscribeRepository extends JpaRepository<Subscribe ,Integer> {
+public interface SubscribeRepository extends JpaRepository<Subscribe ,Long> {
 
     @Modifying
     @Query(value="INSERT INTO subscribe(fromUserId, toUserId,createDate) VALUES(:fromUserId,:toUserId,now())", nativeQuery = true)
-    void mSubscribe(int fromUserId, int toUserId);
+    void mSubscribe(Long fromUserId, Long toUserId);
 
     @Modifying
     @Query(value="DELETE FROM subscribe WHERE fromUserId = :fromUserId AND toUserId = :toUserId", nativeQuery = true)
-    void muNSubscribe(int fromUserId, int toUserId);
+    void muNSubscribe(Long fromUserId, Long toUserId);
 
     @Query(value = "SELECT COUNT(*) FROM subscribe WHERE fromUserId = :principalId AND toUserId = :pageUserId", nativeQuery = true)
-    int mSubscribeState(int principalId, int pageUserId);
+    int mSubscribeState(Long principalId, Long pageUserId);
 
     @Query(value = "SELECT COUNT(*) FROM subscribe WHERE fromUserId = :pageUserId", nativeQuery = true)
-    int mSubscribeCount(int pageUserId);
+    int mSubscribeCount(Long pageUserId);
 
 }

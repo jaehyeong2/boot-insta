@@ -3,7 +3,6 @@ package com.example.instaclone.controller.api;
 import com.example.instaclone.config.auth.PrincipalDetails;
 import com.example.instaclone.domian.comment.Comment;
 import com.example.instaclone.dto.CommentDto;
-import com.example.instaclone.dto.CommonResponseDto;
 import com.example.instaclone.handler.ex.CustomValidationApiException;
 import com.example.instaclone.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +44,7 @@ public class CommentApiController {
     }
 
     @DeleteMapping("/api/comment/{id}")
-    public ResponseEntity<?> commentDelete(@PathVariable int id){
+    public ResponseEntity<?> commentDelete(@PathVariable Long id){
         commentService.commentDelete(id);
         return new ResponseEntity<>(new CommonResponseDto<>(1,"댓글삭제성공",null), HttpStatus.OK);
     }
