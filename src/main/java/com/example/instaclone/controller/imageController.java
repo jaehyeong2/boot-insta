@@ -29,7 +29,7 @@ public class imageController {
     public String popular(Model model) {
 
         List<Image> images = imageService.popular();
-        model.addAttribute("images",model);
+        model.addAttribute("images",images);
         return "image/popular";
     }
 
