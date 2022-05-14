@@ -2,18 +2,15 @@ package com.example.instaclone.domian.subscribe;
 
 import com.example.instaclone.domian.BaseTimeEntity;
 import com.example.instaclone.domian.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 @Entity
 @Table(
         uniqueConstraints = {
@@ -36,12 +33,5 @@ public class Subscribe extends BaseTimeEntity {
     @JoinColumn(name="toUserId")
     @ManyToOne
     private User toUser;
-
-    private LocalDateTime createDate;
-
-    @PrePersist
-    public void  createDate() {
-        this.createDate = LocalDateTime.now();
-    }
 
 }

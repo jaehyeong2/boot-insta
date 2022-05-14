@@ -2,21 +2,18 @@ package com.example.instaclone.domian.user;
 
 import com.example.instaclone.domian.BaseTimeEntity;
 import com.example.instaclone.domian.image.Image;
+import com.example.instaclone.dto.UserUpdateDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
-
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 @Entity
 public class User extends BaseTimeEntity {
 
@@ -48,10 +45,21 @@ public class User extends BaseTimeEntity {
     @JsonIgnoreProperties({"user"})
     private List<Image> images;
 
-    private LocalDateTime createDate;
+    public void updatePasswordAndRole(String password,String role){
+        this.password = password;
+        this.role = role;
+    }
 
-    @PrePersist
-    public void createDate() {
-        this.createDate = LocalDateTime.now();
+    public void updateUserInfo (UserUpdateDto dto,String password) {
+        this.password = password;
+        this.name = dto.getName();
+        this.email = dto.getEmail();
+        this.bio = dto.getBio();
+        this.phone = dto.getPhone();
+        this.gender = dto.getGender();
+    }
+
+    public void updateProfileImageUrl(String imageFileName) {
+        this.profileImageUrl = imageFileName;
     }
 }

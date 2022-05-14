@@ -21,17 +21,13 @@ public class CommentService {
     @Transactional
     public Comment commentWrite(String content,Long imageId, Long userId) {
 
-        Image image = new Image();
-        image.setId(imageId);
+        Image image = new Image(imageId);
 
         User userEntity = userRepository.findById(userId).orElseThrow(()-> {
             throw new CustomApiException("유저 아이디를 찾을 수 없습니다");
         });
 
-        Comment comment = new Comment();
-        comment.setContent(content);
-        comment.setImage(image);
-        comment.setUser(userEntity);
+        Comment comment = Comment.create(content, image, userEntity);
 
         return commentRepository.save(comment);
     }

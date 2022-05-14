@@ -4,6 +4,7 @@ import com.example.instaclone.domian.subscribe.SubscribeRepository;
 import com.example.instaclone.domian.user.User;
 import com.example.instaclone.domian.user.UserRepository;
 import com.example.instaclone.dto.UserProfileDto;
+import com.example.instaclone.dto.UserUpdateDto;
 import com.example.instaclone.handler.ex.CustomApiException;
 import com.example.instaclone.handler.ex.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -46,30 +47,23 @@ public class UserService {
         dto.setSubscribeState(subscribeState == 1);
 
         userEntity.getImages().forEach((image)->{
-            image.setLikeCount(image.getLikes().size());
+            image.updateLikeCount(image.getLikes().size());
         });
 
         return dto;
     }
 
     @Transactional
-    public User modify(Long id, User user){
-        User userEntity = userRepository.findById(id).orElseThrow(() -> {
-                return new IllegalArgumentException("찾을 수 없는 id입니다/");
+    public User modify(Long id, UserUpdateDto dto){
+        User findUser = userRepository.findById(id).orElseThrow(() -> {
+            throw new IllegalArgumentException("찾을 수 없는 id입니다/");
         });
 
-        userEntity.setName(user.getName());
-
-        String rawPassword = user.getPassword();
+        String rawPassword = findUser.getPassword();
         String encodedPassword = encoder.encode(rawPassword);
-        userEntity.setPassword(encodedPassword);
 
-        userEntity.setBio(user.getBio());
-        userEntity.setWebsite(user.getWebsite());
-        userEntity.setPhone(user.getPhone());
-        userEntity.setGender(user.getGender());
-
-        return userEntity;
+        findUser.updateUserInfo(dto,encodedPassword);
+        return findUser;
     }
 
     @Value("${file.path}")
@@ -92,7 +86,7 @@ public class UserService {
             throw new CustomApiException("유저를 찾을 수 업습니다");
         });
 
-        userEntity.setProfileImageUrl(imageFileName);
+        userEntity.updateProfileImageUrl(imageFileName);
         return userEntity;
     }
 

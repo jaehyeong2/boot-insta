@@ -17,15 +17,6 @@ public class UserUpdateDto {
     private String bio;
     private String phone;
     private String gender;
+    private String email;
 
-    public User toEntity() {
-        return User.builder()
-                .name(name)
-                .password(password)
-                .website(website)
-                .bio(bio)
-                .phone(phone)
-                .gender(gender)
-                .build();
-    }
 }

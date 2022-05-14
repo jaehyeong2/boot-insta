@@ -35,11 +35,11 @@ public class ImageService {
 
         images.forEach((image) -> {
 
-            image.setLikeCount(image.getLikes().size());
+            image.updateLikeCount(image.getLikes().size());
 
             image.getLikes().forEach((like) -> {
                 if(like.getUser().getId() == principalId){
-                    image.setLikeState(true);
+                    image.updateLikeState(true);
                 }
             });
 

@@ -5,18 +5,15 @@ import com.example.instaclone.domian.BaseTimeEntity;
 import com.example.instaclone.domian.image.Image;
 import com.example.instaclone.domian.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Data
+@Getter
 @Entity
 public class Comment extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +31,12 @@ public class Comment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Image image;
 
-    private LocalDateTime createDate;
-
-    @PrePersist
-    public void createDate(){
-        this.createDate = LocalDateTime.now();
+    public static Comment create(String content,Image image,User user){
+        return Comment.builder()
+                .content(content)
+                .image(image)
+                .user(user)
+                .build();
     }
+
 }
